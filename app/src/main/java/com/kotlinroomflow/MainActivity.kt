@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kotlinroomflow.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -51,7 +52,11 @@ class MainActivity : AppCompatActivity() {
             val currentDateAndTime: String = sdf.format(Date())
             // if the string is not empty we are calling a
             // add note method to add data to our room database.
-            viewModal.addNote(Note(noteTitle, noteDescription, currentDateAndTime))
+            lifecycleScope.launch {
+                viewModal.addNote(Note(noteTitle, noteDescription, currentDateAndTime)).collect{
+                    Toast.makeText(this@MainActivity,""+it,Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 }

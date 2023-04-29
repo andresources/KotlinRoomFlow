@@ -16,9 +16,7 @@ class NoteRepository(private val notesDao: NotesDao) {
 
     // on below line we are creating an insert method
     // for adding the note to our database.
-    suspend fun insert(note: Note) {
-        notesDao.insert(note)
-    }
+    suspend fun insert(note: Note) = notesDao.insert(note)
 
     // on below line we are creating a delete method
     // for deleting our note from database.

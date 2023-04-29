@@ -26,4 +26,8 @@ class RoomDBViewModel(private val dbHelper: DatabaseHelper) : ViewModel() {
         }
     }
 
+    private fun addUser(){
+
+    }
+
 }

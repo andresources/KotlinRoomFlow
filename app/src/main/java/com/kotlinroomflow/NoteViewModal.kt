@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class NoteViewModal (application: Application) :AndroidViewModel(application) {
@@ -38,9 +39,12 @@ class NoteViewModal (application: Application) :AndroidViewModel(application) {
 
     // on below line we are creating a new method for adding a new note to our database
     // we are calling a method from our repository to add a new note.
-    fun addNote(note: Note) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(note)
+    fun addNote(note: Note) = flow {
+        val id = repository.insert(note)
+        emit("Test : $id")
     }
+
+
 
     fun getNotes() : Flow<List<Note>>{
         return repository.getAllNotes()

@@ -11,7 +11,7 @@ interface NotesDao {
     // below is the insert method for
     // adding a new entry to our database.
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(note :Note)
+    suspend fun insert(note :Note) : Long
 
     // below is the delete method
     // for deleting our note.
